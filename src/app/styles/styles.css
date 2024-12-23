@@ -1,12 +1,22 @@
 :root{
+    /* Colors */
     --blackColor: #2d2c2d;
     --whiteColor: #faf5ec;
+    
+    --pokedexPrimary: #d05f35;
+    --pokedexSecondary: #a34f2f;
+
     --attributeColor: #59b1c3;
     --toughColor: #f4e096;
     --coolColor: #ebb190;
     --beautyColor: #b5c8df;
     --cleverColor: #bbce98;
     --cuteColor: #eabac6;
+
+    /* px sizes */
+    --borderRadiusSmall: 15px;
+    --borderRadius: 20px;
+    /* --borderRadiusLarge:  */
 }
 
 .roundedCheckbox{
@@ -20,6 +30,10 @@
     vertical-align: middle;
     outline: none;
     cursor: pointer;
+}
+.roundedCheckbox.small{
+    width: 16px;
+    height: 16px;
 }
 
 .roundedCheckbox:checked{

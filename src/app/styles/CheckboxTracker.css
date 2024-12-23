@@ -4,7 +4,7 @@
     gap: 5px;
 }
 .CheckboxTracker_root.small{
-    gap: 2px;
+    gap: 0;
 }
 
 .CheckboxTracker_label{
@@ -14,7 +14,7 @@
     font-weight: bold;
 }
 .CheckboxTracker_label.small{
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .CheckboxTracker_checkboxButtonContainer{
