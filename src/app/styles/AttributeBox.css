@@ -25,17 +25,5 @@
 .AttributeBox_root.cute{
     background-color: var(--cuteColor);
 }
-.AttributeBox_label{
-    font-size: 22px;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: bold;
-}
-
-.AttributeBox_checkboxButtonContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
 
 

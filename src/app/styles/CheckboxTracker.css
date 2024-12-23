@@ -1,0 +1,24 @@
+.CheckboxTracker_root{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.CheckboxTracker_root.small{
+    gap: 2px;
+}
+
+.CheckboxTracker_label{
+    font-size: 22px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+.CheckboxTracker_label.small{
+    font-size: 14px;
+}
+
+.CheckboxTracker_checkboxButtonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
