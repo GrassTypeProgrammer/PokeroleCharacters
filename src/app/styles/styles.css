@@ -1,0 +1,30 @@
+:root{
+    --blackColor: #2d2c2d;
+    --whiteColor: #faf5ec;
+    --attributeColor: #59b1c3;
+    --toughColor: #f4e096;
+    --coolColor: #ebb190;
+    --beautyColor: #b5c8df;
+    --cleverhColor: #bbce98;
+    --cuteColor: #eabac6;
+}
+
+.roundedCheckbox{
+    clip-path: circle(50% at 50% 50%);
+    width: 24px;
+    height: 24px;
+    background-color: var(--whiteColor);
+    appearance: none;
+    -webkit-appearnce: none;
+    border-radius: 50%;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+}
+
+.roundedCheckbox:checked{
+    appearance: none;
+    -webkit-appearnce: none;
+    clip-path: circle(50% at 50% 50%);
+    background-color: var(--blackColor);
+}

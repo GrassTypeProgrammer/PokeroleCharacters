@@ -1,0 +1,41 @@
+.AttributeBox_root{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-style: solid;
+    border-width: 8px;
+    border-color: var(--blackColor);
+    padding: 10px;
+    border-radius: 30px;
+    background-color: var(--attributeColor);
+    min-width: 160px;
+}
+.AttributeBox_root.tough{
+    background-color: var(--toughColor);
+}
+.AttributeBox_root.cool{
+    background-color: var(--coolColor);
+}
+.AttributeBox_root.beauty{
+    background-color: var(--beautyColor);
+}
+.AttributeBox_root.clever{
+    background-color: var(--cleverColor);
+}
+.AttributeBox_root.cute{
+    background-color: var(--cuteColor);
+}
+.AttributeBox_label{
+    font-size: 22px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+.AttributeBox_checkboxButtonContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
