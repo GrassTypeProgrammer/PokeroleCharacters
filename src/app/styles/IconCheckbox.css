@@ -1,0 +1,18 @@
+.IconCheckbox_root{
+    width:60px;
+    height:60px;
+    background-color: var(--whiteColor);
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border-radius: var(--borderRadiusSmall);
+}
+
+.IconCheckbox_image{
+    width: 100%;
+    height: auto;
+    opacity: 0.2;
+}
+.IconCheckbox_image.checked{
+    opacity: 1;
+}
