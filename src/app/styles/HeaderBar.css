@@ -1,0 +1,11 @@
+
+
+.HeaderBar_root{
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    background-color: var(--pokedexPrimary);
+    clip-path: polygon(100% 53%, 70% 53%, 57% 100%, 0% 100%, 0 0, 100% 0);
+    border-top-left-radius: var(--borderRadius);
+    border-top-right-radius: var(--borderRadius);
+}

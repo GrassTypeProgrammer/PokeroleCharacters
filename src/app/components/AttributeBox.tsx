@@ -1,4 +1,4 @@
-import './../styles/AttributeBox.css'
+import '../styles/AttributeBox.css'
 import classNames from "classnames";
 import { ComponentProps } from "./Component";
 import CheckboxTracker from './CheckboxTracker';
