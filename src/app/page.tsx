@@ -10,6 +10,7 @@ import IconCheckbox from "./components/IconCheckbox";
 import BadgeList from "./components/BadgeList";
 import { BadgeData } from "./helpers/BadgeHelper";
 import HeaderBar from "./components/HeaderBar";
+import StatPage from "./StatPage";
 
 export default function Home() {
  
@@ -62,13 +63,14 @@ export default function Home() {
           </div>
           <div className="Page_rightSide">
             <div className="Page_rightSideContent">
-              <div className="Page_attributeContainer">
+              <StatPage/>
+              {/* <div className="Page_attributeContainer">
                 <AttributeBox label={"Strength"} maxValue={5} currentValue={3} />
                 <AttributeBox label={"Strength"} maxValue={5} currentValue={3} />
                 <AttributeBox label={"Strength"} maxValue={5} currentValue={3} />
                 <AttributeBox label={"Strength"} maxValue={5} currentValue={3} />
 
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

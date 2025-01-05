@@ -28,6 +28,7 @@
     flex-direction: row;
     gap: 10px;
     width: 1500px;
+    width: 1500px;
     height: 900px;
 }
 
@@ -37,6 +38,7 @@
     flex: 1;
     background-color: var(--whiteColor);
     border-radius: var(--borderRadius);
+    max-width: 750px;
 }
 
 
@@ -52,6 +54,7 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     clip-path: polygon(100% 100%, 0% 100%, 0% 0%, 30% 0%, 45% 10%, 100% 10%);
+    max-width: 750px;
 }
 
 .Page_rightSideContent{
@@ -60,8 +63,3 @@
     flex: 1;
 }
 
-.Page_attributeContainer{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
