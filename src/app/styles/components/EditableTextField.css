@@ -1,0 +1,25 @@
+
+.EditableTextField_root{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 8px 10px;
+    border-color: var(--blackColor);
+    border-width: 4px;
+    border-style: solid;
+    border-radius: var(--borderRadius);
+}
+.EditableTextField_root.center{
+    justify-content: center;
+}
+
+.EditableTextField_label{
+    font-weight: bold;
+}
+
+.EditableTextField_input{
+    all:unset;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
