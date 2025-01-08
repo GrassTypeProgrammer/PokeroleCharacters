@@ -1,0 +1,64 @@
+.ProfilePage_root{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+}
+
+.ProfilePage_row{
+    display: flex;
+    flex-direction: row;
+}
+
+.ProfilePage_image{
+    /* position: absolute;
+    top: 0;
+    right: 0; */
+    border-color: var(--blackColor);
+    border-width: 4px;
+    border-style: solid;
+    border-radius: var(--borderRadius);
+    overflow: hidden;
+    background-color: var(--whiteColor);
+}
+
+.ProfilePage_editableTextField{
+    width: auto;
+}
+.ProfilePage_editableTextField.small{
+    width: 200px;
+}
+.ProfilePage_editableTextField.medium{
+    width: 350px;
+}
+.ProfilePage_editableTextField.flex{
+    flex: 1;
+}
+
+.ProfilePage_top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ProfilePage_bottom{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    background-color: violet;
+}
+
+.ProfilePage_column{
+    display: flex;
+    flex-direction: column;
+}
+.ProfilePage_column.gap{
+    gap: 5px;
+}
+.ProfilePage_column.justify-end{
+    justify-content: flex-end;
+}
+.ProfilePage_column.width-medium{
+    width: 400px;
+}
+
