@@ -1,0 +1,23 @@
+.PokeLabel_root{
+    background-color: var(--whiteColor);
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    width: 200px;
+    border-radius: var(--borderRadius);
+    /* TODO See what this border looks like above the ball */
+    border: solid 2px var(--blackColor);
+    align-items: center;
+}
+
+.PokeLabel_ball{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: var(--pokedexSecondary);
+    margin-left: -2px;
+}
+
+.PokeLabel_label{
+    margin-left: 5px;;
+}
