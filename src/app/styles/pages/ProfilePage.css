@@ -43,9 +43,9 @@
 
 .ProfilePage_bottom{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex: 1;
-    background-color: violet;
+    justify-content: flex-end;
 }
 
 .ProfilePage_column{

@@ -3,6 +3,9 @@ import { ComponentProps } from '../components/Component'
 import Image from "next/image"
 import EditableTextField from '../components/EditableTextField'
 import { useState } from 'react'
+import BadgeList from '../components/BadgeList'
+import PokeLabel from '../components/PokeLabel'
+import CheckboxLabel from '../components/CheckboxLabel'
 
 type Props = ComponentProps & {
 
@@ -16,6 +19,8 @@ export default function StatPage (props: Props) {
     const [confidence, setConfidence] = useState('Name');
     const [money, setMoney] = useState('0');
     const [rank, setRank] = useState('');
+    const [hp, setHP] = useState('0');
+    const [will, setWill] = useState('0');
 
     return <div className='ProfilePage_root'>
         <div className='ProfilePage_top'>
@@ -69,6 +74,23 @@ export default function StatPage (props: Props) {
                     value={concept} 
                     onSubmit={(value:string)=>{ setConcept(value)}}
                 />
+
+                <div className='ProfilePage_row'>
+                    <EditableTextField 
+                        baseClassName='ProfilePage_editableTextField flex'
+                        label='HP:'
+                        id='HP' 
+                        value={hp} 
+                        onSubmit={(value:string)=>{ setHP(value)}}
+                    />
+                     <EditableTextField 
+                        baseClassName='ProfilePage_editableTextField flex'
+                        label='Will:'
+                        id='Will' 
+                        value={will} 
+                        onSubmit={(value:string)=>{ setWill(value)}}
+                    />
+                </div>
             </div>
 
             <div className='ProfilePage_column gap'>
@@ -93,7 +115,25 @@ export default function StatPage (props: Props) {
         </div>
 
         <div className='ProfilePage_bottom'>
+            <div className="ProfilePage_row gap">
+                <div className="ProfilePage_column gap">
+                    <PokeLabel id='PokeLabel0' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
+                    <PokeLabel id='PokeLabel1' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
+                    <PokeLabel id='PokeLabel2' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
+                    <PokeLabel id='PokeLabel3' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
+                    <PokeLabel id='PokeLabel4' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
+                    <PokeLabel id='PokeLabel5' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
+                </div>
+                <div className="ProfilePage_column gap">
+                    <div>Achievements</div>
+                    <CheckboxLabel label='test' id='test' onSubmit={() => {console.log('TODO: make this submit function')}}/>
+                    <CheckboxLabel label='test' id='test' onSubmit={() => {console.log('TODO: make this submit function')}}/>
+                    <CheckboxLabel label='test' id='test' onSubmit={() => {console.log('TODO: make this submit function')}}/>
+                    <CheckboxLabel label='test' id='test' onSubmit={() => {console.log('TODO: make this submit function')}}/>
+                </div>
+            </div>
 
+            <BadgeList badges={[{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'}, ]} />
         </div>
     </div>
 }
