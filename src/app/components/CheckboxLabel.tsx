@@ -8,6 +8,7 @@ type Props = ComponentProps & {
     label: string;
     id: string;
     onSubmit: (value: string) => void;
+    hideCheckbox?: boolean;
 } 
 
 export default function CheckboxLabel(props: Props){
@@ -33,15 +34,17 @@ export default function CheckboxLabel(props: Props){
     }
 
     function onLoseFocus(){
-        setEditMode(false);
+        // setEditMode(false);
     }
     
-    return <div className={classNames('CheckboxLabel_root', props.baseClassName, props.classModifiers)}
-        
-        >
-            <input type='checkbox' className='CheckboxLabel_checkbox'/>
+    return <div className={classNames('CheckboxLabel_root', props.baseClassName, props.classModifiers)}>
+        {/* TODO This needs a form */}
+            {!props.hideCheckbox &&
+                <input type='checkbox' className='CheckboxLabel_checkbox'/>
+            }
+            
             {editMode ?
-                <form id={`CheckboxLabel_${props.id}`} onSubmit={handleSubmit}>
+                <form id={`CheckboxLabel_${props.id}`} className={'CheckboxLabel_form'} onSubmit={handleSubmit}>
                     <input onBlur={onLoseFocus} autoFocus className='CheckboxLabel_input' type='text' defaultValue={props.label} onChange={handleChange}/>
                 </form>
                 :

@@ -1,0 +1,14 @@
+
+
+.ItemsPage_root{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+    gap: 10px;
+}
+
+.ItemsPage_label{
+    height: 25px;
+    /* flex: 1 */
+}

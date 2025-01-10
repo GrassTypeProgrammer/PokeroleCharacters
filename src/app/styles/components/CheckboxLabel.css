@@ -4,11 +4,29 @@
     flex-direction: row;
     width: 200px;
 }
+.CheckboxLabel_root.wide{
+    width: 100%;
+}
 
 .CheckboxLabel_label{
     margin-left: 5px;
     flex: 1;
     border-bottom: solid 2px var(--blackColor)
+}
+
+.CheckboxLabel_input{
+    all:unset;
+    background-color: transparent;
+    border: none;
+    margin-left: 5px;
+    flex: 1;
+    border-bottom: solid 2px var(--blackColor)
+}
+
+.CheckboxLabel_form{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
 }
 
 .CheckboxLabel_checkbox{
