@@ -1,0 +1,31 @@
+.PageStepper_root{
+    display: flex;
+    flex-direction: row;
+}
+
+.PageStepper_arrow{
+    width: 100px;
+}
+
+.PageStepper_dotOuter{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PageStepper_dotInner{
+    width: 10px;
+    height: 10px; 
+    border-radius: 50%;
+    background-color: var(--blackColor);
+    opacity: 0.3;
+}
+.PageStepper_dotInner.current{
+    width: 15px;
+    height: 15px;
+    opacity: 0.6;
+}
+
