@@ -11,9 +11,33 @@ import BadgeList from "./components/BadgeList";
 import { BadgeData } from "./helpers/BadgeHelper";
 import HeaderBar from "./components/HeaderBar";
 import StatPage from "./StatPage";
+import ProfilePage from "./pages/ProfilePage";
+import PageBackground from "./pages/PageBackground";
+import ItemsPage from "./pages/ItemsPage";
+import PageStepper from "./components/PageStepper";
+import { useState } from "react";
+
+/** Character info:
+ * x Name
+ * x age
+ * x concept
+ * x nature
+ * x confidence
+ * x player Name
+ * x Profile picture
+ * x rank
+ * x money
+ * - pokemon (6 slots)
+ * - pokemon caught/seen
+ * 
+ * x hp
+ * x will
+ */
 
 export default function Home() {
- 
+  const [currentPage, setCurrentPage] = useState(0);
+
+
   const skills: SkillGroup[] = [];
 
   const skillGroup: SkillGroup = {
@@ -59,26 +83,32 @@ export default function Home() {
         <div className="Page_pokedex">
           <div className="Page_leftSide">
             <HeaderBar />
+            <div className="Page_leftSideContent">
+            <PageBackground src='/PlaceholderCharacter.png'/>
 
+              <div className="Page_leftSideHeader">
+
+              </div>
+              {currentPage == 0 &&
+                <ProfilePage />
+              }
+              {currentPage == 1 &&
+               <ItemsPage />
+              }
+              
+              <div className="Page_leftSideFooter">
+                <PageStepper pages={2} onPageChange={(currentPage: number) => {setCurrentPage(currentPage)}}/>
+              </div>
+            </div>
           </div>
+
           <div className="Page_rightSide">
             <div className="Page_rightSideContent">
               <StatPage/>
-              {/* <div className="Page_attributeContainer">
-                <AttributeBox label={"Strength"} maxValue={5} currentValue={3} />
-                <AttributeBox label={"Strength"} maxValue={5} currentValue={3} />
-                <AttributeBox label={"Strength"} maxValue={5} currentValue={3} />
-                <AttributeBox label={"Strength"} maxValue={5} currentValue={3} />
-
-              </div> */}
             </div>
           </div>
         </div>
-
-          
         </div>
-        
-        
         
       </main>
       <footer className={styles.footer}>
