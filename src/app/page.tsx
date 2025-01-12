@@ -15,7 +15,7 @@ import ProfilePage from "./pages/ProfilePage";
 import PageBackground from "./pages/PageBackground";
 import ItemsPage from "./pages/ItemsPage";
 import PageStepper from "./components/PageStepper";
-import { useState } from "react";
+import {  useState } from "react";
 
 /** Character info:
  * x Name
@@ -90,7 +90,7 @@ export default function Home() {
 
               </div>
               {currentPage == 0 &&
-                <ProfilePage />
+                <ProfilePage characterID="test"/>
               }
               {currentPage == 1 &&
                <ItemsPage />

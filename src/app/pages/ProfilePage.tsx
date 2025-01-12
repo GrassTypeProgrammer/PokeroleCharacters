@@ -2,25 +2,113 @@ import './../styles/pages/ProfilePage.css'
 import { ComponentProps } from '../components/Component'
 import Image from "next/image"
 import EditableTextField from '../components/EditableTextField'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BadgeList from '../components/BadgeList'
 import PokeLabel from '../components/PokeLabel'
 import CheckboxLabel from '../components/CheckboxLabel'
+import { CharacterProfileData,  createRandomCharacterProfileData,   loadCharacterProfileData, saveCharacterProfileData } from '../databases/CharacterDatabase'
+
+enum DataPoints{
+    Name,
+    Age,
+    Concept,
+    Nature,
+    Confidence,
+    Money,
+    Rank,
+    Hp,
+    Will,
+}
 
 type Props = ComponentProps & {
-
+    characterID: string,
+    // data?: CharacterProfileData;
+    onChangeData?: (data: CharacterProfileData) => void;
 }
 
 export default function StatPage (props: Props) {
-    const [name, setName] = useState('Name');
-    const [age, setAge] = useState('17');
-    const [concept, setConcept] = useState('test');
-    const [nature, setNature] = useState('test');
-    const [confidence, setConfidence] = useState('Name');
-    const [money, setMoney] = useState('0');
-    const [rank, setRank] = useState('');
-    const [hp, setHP] = useState('0');
-    const [will, setWill] = useState('0');
+    const [profileData, setCharacterProfileData] = useState<CharacterProfileData>(loadCharacterProfileData(props.characterID));
+    
+    // const [name, setName] = useState(profileData? profileData.name : '');
+    // const [age, setAge] = useState(profileData? profileData.age?.toString() : '');
+    // const [concept, setConcept] = useState(profileData? profileData.concept : '');
+    // const [nature, setNature] = useState(profileData? profileData.nature : '');
+    // const [confidence, setConfidence] = useState(profileData? profileData.confidence?.toString() : '');
+    // const [money, setMoney] = useState(profileData? profileData.money?.toString() : '');
+    // const [rank, setRank] = useState(profileData? profileData.rank : '');
+    // const [hp, setHp] = useState(profileData? profileData.hp?.toString() : '');
+    // const [will, setWill] = useState(profileData? profileData.will?.toString() : '');
+
+    // useEffect(() => {
+    //     const data = loadCharacterProfileData(props.characterID);
+    //     setCharacterProfileData(data);
+
+    //     // useState(data.name );
+    //     // const [age, setAge] = useState(profileData? profileData.age?.toString() : '');
+    //     // const [concept, setConcept] = useState(profileData? profileData.concept : '');
+    //     // const [nature, setNature] = useState(profileData? profileData.nature : '');
+    //     // const [confidence, setConfidence] = useState(profileData? profileData.confidence?.toString() : '');
+    //     // const [money, setMoney] = useState(profileData? profileData.money?.toString() : '');
+    //     // const [rank, setRank] = useState(profileData? profileData.rank : '');
+    //     // const [hp, setHp] = useState(profileData? profileData.hp?.toString() : '');
+    //     // const [will, setWill] = useState(profileData? profileData.will?.toString() : '');
+    // }, [props.characterID]);
+
+
+
+    function onSubmit(value: string, customData: unknown){
+        const data = Object.assign({}, profileData);
+       
+        if(data){
+            switch (customData) {
+                case DataPoints.Age:
+                    data.age = parseInt(value);
+                    break;
+                case DataPoints.Concept:
+                    data.concept = value;
+                    break;
+                case DataPoints.Nature:
+                    data.nature = value;
+                    break;
+                case DataPoints.Confidence:
+                    data.confidence = parseInt(value);
+                    break;
+                case DataPoints.Money:
+                    data.money = parseInt(value);
+                    break;
+                case DataPoints.Rank:
+                    data.rank = value;
+                    break;
+                case DataPoints.Hp:
+                    data.hp = parseInt(value);
+                    break;
+                case DataPoints.Will:
+                    data.will = parseInt(value);
+                    break;
+                case DataPoints.Name:
+                    data.name = value;
+                    break;
+            }
+
+            saveCharacterProfileData(data);
+            setCharacterProfileData(data);
+            // const data: CharacterProfileData = {
+            //     id: profileData.id,
+            //     name: (customData == DataPoints.Name) ? value : name,
+            //     age: (customData == DataPoints.Age) ? parseInt(value) : parseInt(value),
+            //     concept: (customData == DataPoints.Concept) ? value : concept,
+            //     nature: (customData == DataPoints.Nature) ? value : nature,
+            //     confidence: (customData == DataPoints.Confidence) ? parseInt(value) : parseInt(confidence),
+            //     money: (customData == DataPoints.Money) ? parseInt(value) : parseInt(money),
+            //     rank: (customData == DataPoints.Rank) ? value : rank,
+            //     hp: (customData == DataPoints.Hp) ? parseInt(value) : parseInt(hp),
+            //     will: (customData == DataPoints.Will) ? parseInt(value) : parseInt(will),
+            //     badges: [],
+            //     achievements: [],
+        }
+    }
+
+
 
     return <div className='ProfilePage_root'>
         <div className='ProfilePage_top'>
@@ -30,15 +118,17 @@ export default function StatPage (props: Props) {
                         baseClassName='ProfilePage_editableTextField flex'
                         label='Age:'
                         id='Age' 
-                        value={age} 
-                        onSubmit={(value:string)=>{ setAge(value)}}
+                        value={profileData.age.toString()} 
+                        onSubmit={onSubmit}
+                        customData={DataPoints.Age}
                     />
                      <EditableTextField 
                         baseClassName='ProfilePage_editableTextField flex'
                         label='Rank:'
                         id='Rank' 
-                        value={rank} 
-                        onSubmit={(value:string)=>{ setRank(value)}}
+                        value={profileData.rank} 
+                        onSubmit={onSubmit}
+                        customData={DataPoints.Rank}
                     />
                 </div>
                  
@@ -47,15 +137,17 @@ export default function StatPage (props: Props) {
                         baseClassName='ProfilePage_editableTextField flex'
                         label='Nature:'
                         id='Nature' 
-                        value={nature} 
-                        onSubmit={(value:string)=>{ setNature(value)}}
+                        value={profileData.nature} 
+                        onSubmit={onSubmit}
+                        customData={DataPoints.Nature}
                     />
                     <EditableTextField 
                         baseClassName='ProfilePage_editableTextField flex'
                         label='Confidence:'
                         id='Confidence' 
-                        value={confidence} 
-                        onSubmit={(value:string)=>{ setConfidence(value)}}
+                        value={profileData.confidence.toString()} 
+                        onSubmit={onSubmit}
+                        customData={DataPoints.Confidence}
                     />
                 </div>
 
@@ -63,16 +155,18 @@ export default function StatPage (props: Props) {
                     baseClassName='ProfilePage_editableTextField'
                     label='Money:'
                     id='Money' 
-                    value={money} 
-                    onSubmit={(value:string)=>{ setMoney(value)}}
+                    value={profileData.money.toString()} 
+                    onSubmit={onSubmit}
+                    customData={DataPoints.Money}
                 />
 
                 <EditableTextField 
                     baseClassName='ProfilePage_editableTextField'
                     label='Concept:'
                     id='Concept' 
-                    value={concept} 
-                    onSubmit={(value:string)=>{ setConcept(value)}}
+                    value={profileData.concept} 
+                    onSubmit={onSubmit}
+                    customData={DataPoints.Concept}
                 />
 
                 <div className='ProfilePage_row'>
@@ -80,15 +174,17 @@ export default function StatPage (props: Props) {
                         baseClassName='ProfilePage_editableTextField flex'
                         label='HP:'
                         id='HP' 
-                        value={hp} 
-                        onSubmit={(value:string)=>{ setHP(value)}}
+                        value={profileData.hp.toString()} 
+                        onSubmit={onSubmit}
+                        customData={DataPoints.Hp}
                     />
                      <EditableTextField 
                         baseClassName='ProfilePage_editableTextField flex'
                         label='Will:'
                         id='Will' 
-                        value={will} 
-                        onSubmit={(value:string)=>{ setWill(value)}}
+                        value={profileData.will.toString()} 
+                        onSubmit={onSubmit}
+                        customData={DataPoints.Will}
                     />
                 </div>
             </div>
@@ -108,8 +204,9 @@ export default function StatPage (props: Props) {
                     baseClassName='ProfilePage_editableTextField'
                     classModifiers='center small'
                     id='CharacterName' 
-                    value={name} 
-                    onSubmit={(value:string)=>{ setName(value)}}
+                    value={profileData.name} 
+                    onSubmit={onSubmit}
+                    customData={DataPoints.Name}
                 />
             </div>
         </div>

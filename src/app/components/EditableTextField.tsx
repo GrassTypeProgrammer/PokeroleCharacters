@@ -8,7 +8,7 @@ type Props = ComponentProps & {
     id: string;
     value?: string;
     label?: string;
-    onSubmit: (value: string) => void;
+    onSubmit: (value: string, customData?: unknown) => void;
 }
 
 
@@ -27,7 +27,7 @@ export default function EditableTextField (props: Props) {
     // TODO: What type does this need?
     function handleSubmit(event){
         event.preventDefault();
-        props.onSubmit(newValue)
+        onSubmit(newValue);
         setEditMode(false);
     }
 
@@ -35,10 +35,15 @@ export default function EditableTextField (props: Props) {
         setNewValue(event.currentTarget.value)
     }
 
-    function onLoseFocus(){
+    function onLoseFocus(event: React.ChangeEvent<HTMLInputElement>){
+        handleChange(event);
         setEditMode(false);
+        onSubmit(event.target.value);
     }
 
+    function onSubmit(value: string){
+        props.onSubmit(value, props.customData)
+    }
 
     return  <div className={classNames('EditableTextField_root', props.baseClassName, props.classModifiers)}
                 onClick={onSelect}
