@@ -7,13 +7,15 @@ import { useState } from "react";
 type Props = ComponentProps & {
     label: string;
     id: string;
-    onSubmit: (value: string) => void;
+    checked?: boolean;
+    onSubmit: (value: string, checked: boolean, customData?: unknown) => void;
     hideCheckbox?: boolean;
 } 
 
 export default function CheckboxLabel(props: Props){
     const [editMode, setEditMode] = useState(false);
-    const [newValue, setNewValue] = useState('');
+    const [newLabel, setNewLabel] = useState(props.label);
+    const [newChecked, setNewChecked] = useState(props.checked ?? false);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function onSelect(event: React.MouseEvent<HTMLInputElement>){
@@ -25,12 +27,21 @@ export default function CheckboxLabel(props: Props){
     // TODO: What type does this need?
     function handleSubmit(event){
         event.preventDefault();
-        props.onSubmit?.(newValue);
-        setEditMode(false);
+        onSubmit(newLabel, newChecked)
     }
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>){
-        setNewValue(event.currentTarget.value)
+        setNewLabel(event.currentTarget.value)
+    }
+
+    function handleCheckboxChange(event: React.ChangeEvent<HTMLInputElement>){
+        setNewChecked(event.currentTarget.checked)
+        onSubmit(newLabel, event.currentTarget.checked)
+    }
+
+    function onSubmit(label: string, checked: boolean){
+        props.onSubmit?.(label, checked, props.customData);
+        setEditMode(false);
     }
 
     function onLoseFocus(){
@@ -40,7 +51,7 @@ export default function CheckboxLabel(props: Props){
     return <div className={classNames('CheckboxLabel_root', props.baseClassName, props.classModifiers)}>
         {/* TODO This needs a form */}
             {!props.hideCheckbox &&
-                <input type='checkbox' className='CheckboxLabel_checkbox'/>
+                <input type='checkbox' className='CheckboxLabel_checkbox' defaultChecked={props.checked} onChange={handleCheckboxChange}/>
             }
             
             {editMode ?

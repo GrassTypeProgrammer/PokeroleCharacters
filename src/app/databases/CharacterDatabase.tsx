@@ -86,7 +86,7 @@ export function createRandomCharacterProfileData(){
         confidence: 9,
         money: 2000,
         concept: 'gardener',
-        achievements: [{label:'test', completed: true}],
+        achievements: [{label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}],
         badges: [true, false,false,false,false,false,false,false,],
     }
 

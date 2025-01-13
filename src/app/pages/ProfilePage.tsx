@@ -2,7 +2,7 @@ import './../styles/pages/ProfilePage.css'
 import { ComponentProps } from '../components/Component'
 import Image from "next/image"
 import EditableTextField from '../components/EditableTextField'
-import { useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import BadgeList from '../components/BadgeList'
 import PokeLabel from '../components/PokeLabel'
 import CheckboxLabel from '../components/CheckboxLabel'
@@ -28,33 +28,6 @@ type Props = ComponentProps & {
 
 export default function StatPage (props: Props) {
     const [profileData, setCharacterProfileData] = useState<CharacterProfileData>(loadCharacterProfileData(props.characterID));
-    
-    // const [name, setName] = useState(profileData? profileData.name : '');
-    // const [age, setAge] = useState(profileData? profileData.age?.toString() : '');
-    // const [concept, setConcept] = useState(profileData? profileData.concept : '');
-    // const [nature, setNature] = useState(profileData? profileData.nature : '');
-    // const [confidence, setConfidence] = useState(profileData? profileData.confidence?.toString() : '');
-    // const [money, setMoney] = useState(profileData? profileData.money?.toString() : '');
-    // const [rank, setRank] = useState(profileData? profileData.rank : '');
-    // const [hp, setHp] = useState(profileData? profileData.hp?.toString() : '');
-    // const [will, setWill] = useState(profileData? profileData.will?.toString() : '');
-
-    // useEffect(() => {
-    //     const data = loadCharacterProfileData(props.characterID);
-    //     setCharacterProfileData(data);
-
-    //     // useState(data.name );
-    //     // const [age, setAge] = useState(profileData? profileData.age?.toString() : '');
-    //     // const [concept, setConcept] = useState(profileData? profileData.concept : '');
-    //     // const [nature, setNature] = useState(profileData? profileData.nature : '');
-    //     // const [confidence, setConfidence] = useState(profileData? profileData.confidence?.toString() : '');
-    //     // const [money, setMoney] = useState(profileData? profileData.money?.toString() : '');
-    //     // const [rank, setRank] = useState(profileData? profileData.rank : '');
-    //     // const [hp, setHp] = useState(profileData? profileData.hp?.toString() : '');
-    //     // const [will, setWill] = useState(profileData? profileData.will?.toString() : '');
-    // }, [props.characterID]);
-
-
 
     function onSubmit(value: string, customData: unknown){
         const data = Object.assign({}, profileData);
@@ -90,25 +63,50 @@ export default function StatPage (props: Props) {
                     break;
             }
 
-            saveCharacterProfileData(data);
-            setCharacterProfileData(data);
-            // const data: CharacterProfileData = {
-            //     id: profileData.id,
-            //     name: (customData == DataPoints.Name) ? value : name,
-            //     age: (customData == DataPoints.Age) ? parseInt(value) : parseInt(value),
-            //     concept: (customData == DataPoints.Concept) ? value : concept,
-            //     nature: (customData == DataPoints.Nature) ? value : nature,
-            //     confidence: (customData == DataPoints.Confidence) ? parseInt(value) : parseInt(confidence),
-            //     money: (customData == DataPoints.Money) ? parseInt(value) : parseInt(money),
-            //     rank: (customData == DataPoints.Rank) ? value : rank,
-            //     hp: (customData == DataPoints.Hp) ? parseInt(value) : parseInt(hp),
-            //     will: (customData == DataPoints.Will) ? parseInt(value) : parseInt(will),
-            //     badges: [],
-            //     achievements: [],
+            setAndSaveProfileData(data);
         }
     }
 
+    function setAndSaveProfileData(data: CharacterProfileData){
+        saveCharacterProfileData(data);
+        setCharacterProfileData(data);
+    }
 
+    function createAchievements(){
+        const achievements: ReactNode[] = [];
+        
+        if(profileData){
+            for (let index = 0; index < profileData.achievements.length; index++) {
+                const element = profileData.achievements[index];
+                achievements.push(
+                    <CheckboxLabel 
+                        label={element.label} 
+                        checked={element.completed}
+                        id={`ProfilePage_CheckboxLabel_${index}`} 
+                        key={`ProfilePage_CheckboxLabel_${index}`} 
+                        onSubmit={onSubmitCheckboxLabel}
+                        customData={index}
+                    />
+                )
+            }
+        }
+
+        return achievements;
+    }
+
+    function onSubmitCheckboxLabel(label: string, checked: boolean, customData?: unknown){
+        const data = Object.assign({}, profileData);
+        const achievements = data.achievements;
+
+        if(typeof customData === 'number'){
+            const index: number = customData;
+            achievements[index].label = label;
+            achievements[customData].completed = checked;
+            data.achievements = achievements;
+        }
+        
+        setAndSaveProfileData(data);
+    }
 
     return <div className='ProfilePage_root'>
         <div className='ProfilePage_top'>
@@ -223,10 +221,7 @@ export default function StatPage (props: Props) {
                 </div>
                 <div className="ProfilePage_column gap">
                     <div>Achievements</div>
-                    <CheckboxLabel label='test' id='test' onSubmit={() => {console.log('TODO: make this submit function')}}/>
-                    <CheckboxLabel label='test' id='test' onSubmit={() => {console.log('TODO: make this submit function')}}/>
-                    <CheckboxLabel label='test' id='test' onSubmit={() => {console.log('TODO: make this submit function')}}/>
-                    <CheckboxLabel label='test' id='test' onSubmit={() => {console.log('TODO: make this submit function')}}/>
+                    {createAchievements()}
                 </div>
             </div>
 
