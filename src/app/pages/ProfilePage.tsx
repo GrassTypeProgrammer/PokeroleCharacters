@@ -2,11 +2,11 @@ import './../styles/pages/ProfilePage.css'
 import { ComponentProps } from '../components/Component'
 import Image from "next/image"
 import EditableTextField from '../components/EditableTextField'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useReducer } from 'react'
 import BadgeList from '../components/BadgeList'
 import PokeLabel from '../components/PokeLabel'
 import CheckboxLabel from '../components/CheckboxLabel'
-import { CharacterProfileData,  createRandomCharacterProfileData,   loadCharacterProfileData, saveCharacterProfileData } from '../databases/CharacterDatabase'
+import { CharacterProfileData, loadCharacterProfileData, saveCharacterProfileData } from '../databases/CharacterDatabase'
 
 enum DataPoints{
     Name,
@@ -18,6 +18,7 @@ enum DataPoints{
     Rank,
     Hp,
     Will,
+    Achievements,
 }
 
 type Props = ComponentProps & {
@@ -26,50 +27,24 @@ type Props = ComponentProps & {
     onChangeData?: (data: CharacterProfileData) => void;
 }
 
+type Achievement = {
+    label: string, 
+    checked: boolean,
+    index: number,
+}
+
+type Action = {
+    dataPoint: DataPoints,
+    value?: string,
+    achievement?: Achievement,
+}
+
+
 export default function StatPage (props: Props) {
-    const [profileData, setCharacterProfileData] = useState<CharacterProfileData>(loadCharacterProfileData(props.characterID));
+    const [profileData, dispatchReducer] = useReducer(reducer, loadCharacterProfileData(props.characterID));
 
     function onSubmit(value: string, customData: unknown){
-        const data = Object.assign({}, profileData);
-       
-        if(data){
-            switch (customData) {
-                case DataPoints.Age:
-                    data.age = parseInt(value);
-                    break;
-                case DataPoints.Concept:
-                    data.concept = value;
-                    break;
-                case DataPoints.Nature:
-                    data.nature = value;
-                    break;
-                case DataPoints.Confidence:
-                    data.confidence = parseInt(value);
-                    break;
-                case DataPoints.Money:
-                    data.money = parseInt(value);
-                    break;
-                case DataPoints.Rank:
-                    data.rank = value;
-                    break;
-                case DataPoints.Hp:
-                    data.hp = parseInt(value);
-                    break;
-                case DataPoints.Will:
-                    data.will = parseInt(value);
-                    break;
-                case DataPoints.Name:
-                    data.name = value;
-                    break;
-            }
-
-            setAndSaveProfileData(data);
-        }
-    }
-
-    function setAndSaveProfileData(data: CharacterProfileData){
-        saveCharacterProfileData(data);
-        setCharacterProfileData(data);
+        dispatchReducer({dataPoint: customData as DataPoints, value});
     }
 
     function createAchievements(){
@@ -95,17 +70,13 @@ export default function StatPage (props: Props) {
     }
 
     function onSubmitCheckboxLabel(label: string, checked: boolean, customData?: unknown){
-        const data = Object.assign({}, profileData);
-        const achievements = data.achievements;
+        const index = typeof customData === 'number' ? customData : 0;
 
-        if(typeof customData === 'number'){
-            const index: number = customData;
-            achievements[index].label = label;
-            achievements[customData].completed = checked;
-            data.achievements = achievements;
-        }
-        
-        setAndSaveProfileData(data);
+        dispatchReducer({
+            dataPoint: DataPoints.Achievements, 
+            achievement:{index, label, checked},
+            
+        });
     }
 
     return <div className='ProfilePage_root'>
@@ -228,4 +199,56 @@ export default function StatPage (props: Props) {
             <BadgeList badges={[{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'}, ]} />
         </div>
     </div>
+}
+
+
+function reducer(state: CharacterProfileData, action: Action){
+    const data = Object.assign({}, state);
+    const value = action.value ?? '';
+       
+    if(data){
+        switch (action.dataPoint) {
+            case DataPoints.Age:
+                data.age = parseInt(value);
+                break;
+            case DataPoints.Concept:
+                data.concept = value;
+                break;
+            case DataPoints.Nature:
+                data.nature = value;
+                break;
+            case DataPoints.Confidence:
+                data.confidence = parseInt(value);
+                break;
+            case DataPoints.Money:
+                data.money = parseInt(value);
+                break;
+            case DataPoints.Rank:
+                data.rank = value;
+                break;
+            case DataPoints.Hp:
+                data.hp = parseInt(value);
+                break;
+            case DataPoints.Will:
+                data.will = parseInt(value);
+                break;
+            case DataPoints.Name:
+                data.name = value;
+                break;
+            case DataPoints.Achievements:
+                const achievement = action.achievement
+
+                if(achievement){
+                    const achievements = data.achievements;
+                    achievements[achievement.index].label = achievement.label;
+                    achievements[achievement.index].completed = achievement.checked;
+                    data.achievements = achievements;
+                }
+                break;
+        }
+        
+        saveCharacterProfileData(data);
+    }
+
+    return data;
 }
