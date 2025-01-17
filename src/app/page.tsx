@@ -1,77 +1,20 @@
 'use client'
 // import Image from "next/image";
-import AttributeBox from "./components/AttributeBox";
-import SkillBox, { SkillData, SkillGroup } from "./components/SkillBox";
+import  { SkillData, SkillGroup } from "./components/SkillBox";
 import styles from "./page.module.css";
-import Image from "next/image"
 import './styles/styles.css'
 import './styles/Page.css'
-import IconCheckbox from "./components/IconCheckbox";
-import BadgeList from "./components/BadgeList";
-import { BadgeData } from "./helpers/BadgeHelper";
 import HeaderBar from "./components/HeaderBar";
 import StatPage from "./StatPage";
 import ProfilePage from "./pages/ProfilePage";
 import PageBackground from "./pages/PageBackground";
 import ItemsPage from "./pages/ItemsPage";
 import PageStepper from "./components/PageStepper";
-import {  useEffect, useState } from "react";
-import { createRandomCharacterProfileData, saveCharacterProfileData } from "./databases/CharacterDatabase";
+import { useState } from "react";
 
-/** Character info:
- * x Name
- * x age
- * x concept
- * x nature
- * x confidence
- * x player Name
- * x Profile picture
- * x rank
- * x money
- * - pokemon (6 slots)
- * - pokemon caught/seen
- * 
- * x hp
- * x will
- */
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
-
-
-  const skills: SkillGroup[] = [];
-
-  const skillGroup: SkillGroup = {
-    skills: [],
-  }
-
-  const skill:SkillData = {
-    label: 'skill', 
-    currentValue: 2,
-    maxValue: 5,
-    category: 'category',
-  }
-  
-  skillGroup.skills.push(skill);
-  skillGroup.skills.push(skill);
-  skillGroup.skills.push(skill);
-  skillGroup.skills.push(skill);
-
-  skills.push(skillGroup);
-  skills.push(skillGroup);
-  skills.push(skillGroup);
-  skills.push(skillGroup);
-
-  // const badges: BadgeData[] = [
-  //   {name: 'badge 0', image: '/volcanoBadge.png', obtained: true, ID: 0},
-  //   {name: 'badge 1', image: '/volcanoBadge.png', obtained: true, ID: 1},
-  //   {name: 'badge 2', image: '/volcanoBadge.png', obtained: false, ID: 2},
-  //   {name: 'badge 3', image: '/volcanoBadge.png', obtained: false, ID: 3},
-  //   {name: 'badge 4', image: '/volcanoBadge.png', obtained: false, ID: 4},
-  //   {name: 'badge 5', image: '/volcanoBadge.png', obtained: false, ID: 5},
-  //   {name: 'badge 6', image: '/volcanoBadge.png', obtained: true, ID: 6},
-  //   {name: 'badge 7', image: '/volcanoBadge.png', obtained: false, ID: 7},
-  // ]
   
 //   useEffect(() =>{
 //     saveCharacterProfileData(createRandomCharacterProfileData())

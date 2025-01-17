@@ -45,6 +45,7 @@ export default function CheckboxLabel(props: Props){
     }
 
     function onLoseFocus(){
+        // TODO make this work the same way it does in editabletextfield
         // setEditMode(false);
     }
     
