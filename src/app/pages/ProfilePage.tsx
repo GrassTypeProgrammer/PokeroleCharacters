@@ -6,7 +6,7 @@ import { ReactNode, useReducer } from 'react'
 import BadgeList from '../components/BadgeList'
 import PokeLabel from '../components/PokeLabel'
 import CheckboxLabel from '../components/CheckboxLabel'
-import { CharacterProfileData, loadCharacterProfileData, saveCharacterProfileData } from '../databases/CharacterDatabase'
+import { BadgeData, CharacterProfileData, loadCharacterProfileData, saveCharacterProfileData } from '../databases/CharacterDatabase'
 
 enum DataPoints{
     Name,
@@ -20,6 +20,7 @@ enum DataPoints{
     Will,
     Achievements,
     Pokelabel,
+    Badges,
 }
 
 type Props = ComponentProps & {
@@ -39,6 +40,7 @@ type Action = {
     value?: string,
     achievement?: Achievement,
     index?: number,
+    badgeData?: BadgeData[],
 }
 
 
@@ -112,6 +114,10 @@ export default function StatPage (props: Props) {
             value: label,
             index,
         });
+    }
+
+    function onBadgesChange(badges: BadgeData[]){
+        dispatchReducer({dataPoint: DataPoints.Badges, badgeData: badges});
     }
 
     return <div className='ProfilePage_root'>
@@ -226,7 +232,7 @@ export default function StatPage (props: Props) {
                 </div>
             </div>
 
-            <BadgeList badges={[{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'},{ID: 0, name: '', image: '/volcanoBadge.png'}, ]} />
+            <BadgeList badges={profileData.badges} onChange={onBadgesChange} />
         </div>
     </div>
 }
@@ -284,7 +290,14 @@ function reducer(state: CharacterProfileData, action: Action){
                 }
 
                 data.currentPokemon = currentPokemon;
-                
+                break;
+            case DataPoints.Badges:
+                const badges = action.badgeData;
+
+                if(badges != undefined){
+                    data.badges = badges;
+                }
+
                 break;
         }
         

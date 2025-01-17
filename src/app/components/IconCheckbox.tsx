@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { ComponentProps } from "./Component";
-import { ChangeEvent, Key, useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import Image from "next/image"
 import './../styles/IconCheckbox.css'
 
@@ -10,7 +10,7 @@ type Props = ComponentProps & {
     alt: string;
     defaultChecked?: boolean;
     key?: Key | null | undefined;
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (checked: boolean, customData: unknown) => void;
 }
 
 export default function IconCheckbox(props: Props){
@@ -23,6 +23,7 @@ export default function IconCheckbox(props: Props){
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function onSelect(event: React.MouseEvent<HTMLInputElement>){
         setChecked(!checked);
+        props.onChange?.(!checked, props.customData);
     }
 
     return <div className={classNames("IconCheckbox_root", props.classModifiers)} onClick={onSelect}>

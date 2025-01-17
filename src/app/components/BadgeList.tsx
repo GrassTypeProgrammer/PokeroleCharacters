@@ -2,14 +2,14 @@ import './../styles/BadgeList.css'
 import classNames from "classnames";
 import { ComponentProps } from "./Component";
 import { ReactNode, useEffect, useState } from "react";
-import { BadgeData } from "../helpers/BadgeHelper";
 import IconCheckbox from "./IconCheckbox";
-import { nanoid } from "nanoid";
+import { BadgeData } from '../databases/CharacterDatabase';
 
 
 
 type Props = ComponentProps & {
     badges: BadgeData[];
+    onChange: (badges: BadgeData[]) => void;
 }
 
 export default function BadgeList(props: Props){
@@ -31,13 +31,27 @@ export default function BadgeList(props: Props){
                     defaultChecked={badgeData.obtained} 
                     icon={badgeData.image} 
                     alt={badgeData.name}  
-                    key={`badge_${badgeData.name}_${nanoid()}`}
+                    key={badgeData.ID}
+                    onChange={onBadgeChange}
+                    customData={index}
                 />
+
                 badgeNodes.push(badgeNode);
             }
         }
 
         return badgeNodes;
+    }
+
+    function onBadgeChange(checked: boolean, customData: unknown){
+        const index = typeof customData === 'number' ? customData : 0;
+        const updatedBadges = badges;
+        
+        if(updatedBadges != undefined && index < updatedBadges.length){
+            updatedBadges[index].obtained = checked;
+            setBadges(updatedBadges);
+            props.onChange?.(updatedBadges);
+        }
     }
 
     return <div className={classNames('BadgeList_root', props.baseClassName, props.classModifiers)}>

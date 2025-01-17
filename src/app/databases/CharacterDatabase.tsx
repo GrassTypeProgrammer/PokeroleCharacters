@@ -26,13 +26,20 @@ export type CharacterProfileData = {
     money: number,
     concept: string,
     achievements: AchievementData[],
-    badges: boolean[],
+    badges: BadgeData[],
     currentPokemon: string[],
 }
 
 export type AchievementData = {
     label: string;
     completed: boolean;
+}
+
+export type BadgeData = {
+    ID: string;
+    name: string,
+    image?: string,
+    obtained?: boolean,
 }
 
 
@@ -87,11 +94,26 @@ export function createRandomCharacterProfileData(){
         money: 2000,
         concept: 'gardener',
         achievements: [{label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}],
-        badges: [true, false,false,false,false,false,false,false,],
+        badges: generateRandomBadgeData(),
         currentPokemon: ['','','','','','',],
     }
 
     return testCharacter;
+}
+
+export function generateRandomBadgeData(){
+    const badges: BadgeData[] = [];
+
+    for (let index = 0; index < 8; index++) {
+        badges.push({
+            ID: `badge_${index}`,
+            name: `badge_${index}`,
+            image: '/volcanoBadge.png',
+            obtained: false,
+        })
+    }
+
+    return badges;
 }
 
 export function saveCharacterData(data: CharacterData){
