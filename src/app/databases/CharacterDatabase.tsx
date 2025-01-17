@@ -3,7 +3,6 @@
 export type CharacterData = 
 {
     id: string,
-    currentPokemon: string[],
     items: string[],
    
 }
@@ -28,6 +27,7 @@ export type CharacterProfileData = {
     concept: string,
     achievements: AchievementData[],
     badges: boolean[],
+    currentPokemon: string[],
 }
 
 export type AchievementData = {
@@ -88,6 +88,7 @@ export function createRandomCharacterProfileData(){
         concept: 'gardener',
         achievements: [{label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}],
         badges: [true, false,false,false,false,false,false,false,],
+        currentPokemon: ['','','','','','',],
     }
 
     return testCharacter;

@@ -15,7 +15,8 @@ import ProfilePage from "./pages/ProfilePage";
 import PageBackground from "./pages/PageBackground";
 import ItemsPage from "./pages/ItemsPage";
 import PageStepper from "./components/PageStepper";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
+import { createRandomCharacterProfileData, saveCharacterProfileData } from "./databases/CharacterDatabase";
 
 /** Character info:
  * x Name
@@ -71,7 +72,10 @@ export default function Home() {
   //   {name: 'badge 6', image: '/volcanoBadge.png', obtained: true, ID: 6},
   //   {name: 'badge 7', image: '/volcanoBadge.png', obtained: false, ID: 7},
   // ]
-
+  
+//   useEffect(() =>{
+//     saveCharacterProfileData(createRandomCharacterProfileData())
+// })
 
   return (
     <div className="Page_root">

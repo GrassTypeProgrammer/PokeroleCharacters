@@ -19,6 +19,7 @@ enum DataPoints{
     Hp,
     Will,
     Achievements,
+    Pokelabel,
 }
 
 type Props = ComponentProps & {
@@ -37,11 +38,14 @@ type Action = {
     dataPoint: DataPoints,
     value?: string,
     achievement?: Achievement,
+    index?: number,
 }
 
 
 export default function StatPage (props: Props) {
     const [profileData, dispatchReducer] = useReducer(reducer, loadCharacterProfileData(props.characterID));
+
+
 
     function onSubmit(value: string, customData: unknown){
         dispatchReducer({dataPoint: customData as DataPoints, value});
@@ -69,13 +73,44 @@ export default function StatPage (props: Props) {
         return achievements;
     }
 
+    function createPokelables(){
+        const labels: ReactNode[] = [];
+
+        if(profileData && profileData.currentPokemon){
+            for (let index = 0; index < profileData.currentPokemon.length; index++) {
+                const element = profileData.currentPokemon[index];
+                labels.push(
+                    <PokeLabel
+                        // TODO give better id and key 
+                        id={'PokeLabel_' + index} 
+                        key={'PokeLabel_' + index} 
+                        label={element} 
+                        customData={index}
+                        onSubmit={onSubmitPokeLabel}
+                    />
+               )
+            }
+        }
+
+        return labels;
+    }
+
     function onSubmitCheckboxLabel(label: string, checked: boolean, customData?: unknown){
         const index = typeof customData === 'number' ? customData : 0;
 
         dispatchReducer({
             dataPoint: DataPoints.Achievements, 
             achievement:{index, label, checked},
-            
+        });
+    }
+
+    function onSubmitPokeLabel(label: string, customData?: unknown){
+        const index = typeof customData === 'number' ? customData : 0;
+
+        dispatchReducer({
+            dataPoint: DataPoints.Pokelabel, 
+            value: label,
+            index,
         });
     }
 
@@ -183,13 +218,8 @@ export default function StatPage (props: Props) {
         <div className='ProfilePage_bottom'>
             <div className="ProfilePage_row gap">
                 <div className="ProfilePage_column gap">
-                    <PokeLabel id='PokeLabel0' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
-                    <PokeLabel id='PokeLabel1' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
-                    <PokeLabel id='PokeLabel2' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
-                    <PokeLabel id='PokeLabel3' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
-                    <PokeLabel id='PokeLabel4' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
-                    <PokeLabel id='PokeLabel5' label='Pikachu' onSubmit={()=>{console.log('TODO: create this submit function')}}/>
-                </div>
+                    {createPokelables()}
+                   </div>
                 <div className="ProfilePage_column gap">
                     <div>Achievements</div>
                     {createAchievements()}
@@ -244,6 +274,17 @@ function reducer(state: CharacterProfileData, action: Action){
                     achievements[achievement.index].completed = achievement.checked;
                     data.achievements = achievements;
                 }
+                break;
+            case DataPoints.Pokelabel:
+                const index = action.index;
+                const currentPokemon = data.currentPokemon;
+
+                if(index != undefined && currentPokemon != undefined && index < currentPokemon.length){
+                    currentPokemon[index] = value;
+                }
+
+                data.currentPokemon = currentPokemon;
+                
                 break;
         }
         

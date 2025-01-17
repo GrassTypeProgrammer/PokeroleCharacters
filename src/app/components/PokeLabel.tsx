@@ -6,7 +6,7 @@ import { useState } from 'react';
 type Props = ComponentProps & {
     label: string;
     id: string;
-    onSubmit: (value: string) => void;
+    onSubmit: (value: string, customData?: unknown) => void;
 }
 
 export default function PokeLabel (props: Props) {
@@ -23,7 +23,7 @@ export default function PokeLabel (props: Props) {
     // TODO: What type does this need?
     function handleSubmit(event){
         event.preventDefault();
-        props.onSubmit?.(newValue);
+        props.onSubmit?.(newValue, props.customData);
         setEditMode(false);
     }
 
