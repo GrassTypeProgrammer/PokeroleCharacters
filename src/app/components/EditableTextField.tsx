@@ -24,8 +24,7 @@ export default function EditableTextField (props: Props) {
         }
     }
 
-    // TODO: What type does this need?
-    function handleSubmit(event){
+    function handleSubmit(event: React.FormEvent){
         event.preventDefault();
         onSubmit(newValue);
         setEditMode(false);

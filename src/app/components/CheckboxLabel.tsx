@@ -24,10 +24,10 @@ export default function CheckboxLabel(props: Props){
         }
     }
 
-    // TODO: What type does this need?
-    function handleSubmit(event){
+    function handleSubmit(event: React.FormEvent){
         event.preventDefault();
-        onSubmit(newLabel, newChecked)
+        onSubmit(newLabel, newChecked);
+        setEditMode(false);
     }
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>){
@@ -44,13 +44,13 @@ export default function CheckboxLabel(props: Props){
         setEditMode(false);
     }
 
-    function onLoseFocus(){
-        // TODO make this work the same way it does in editabletextfield
-        // setEditMode(false);
+    function onLoseFocus(event: React.ChangeEvent<HTMLInputElement>){
+        handleChange(event);
+        setEditMode(false);
+        onSubmit(event.target.value, newChecked);
     }
     
     return <div className={classNames('CheckboxLabel_root', props.baseClassName, props.classModifiers)}>
-        {/* TODO This needs a form */}
             {!props.hideCheckbox &&
                 <input type='checkbox' className='CheckboxLabel_checkbox' defaultChecked={props.checked} onChange={handleCheckboxChange}/>
             }

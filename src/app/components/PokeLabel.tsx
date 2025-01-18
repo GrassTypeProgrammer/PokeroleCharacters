@@ -20,10 +20,9 @@ export default function PokeLabel (props: Props) {
         }
     }
 
-    // TODO: What type does this need?
-    function handleSubmit(event){
+    function handleSubmit(event: React.FormEvent){
         event.preventDefault();
-        props.onSubmit?.(newValue, props.customData);
+        onSubmit(newValue);
         setEditMode(false);
     }
 
@@ -31,11 +30,16 @@ export default function PokeLabel (props: Props) {
         setNewValue(event.currentTarget.value)
     }
 
-    function onLoseFocus(){
-        // TODO make this work the same way it does in editabletextfield
+    function onLoseFocus(event: React.ChangeEvent<HTMLInputElement>){
+        handleChange(event);
         setEditMode(false);
+        onSubmit(event.target.value);
     }
     
+    function onSubmit(value: string){
+        props.onSubmit(value, props.customData)
+    }
+
     return <div className={classNames('PokeLabel_root', props.baseClassName, props.classModifiers)}
                 onClick={onSelect}
             >
