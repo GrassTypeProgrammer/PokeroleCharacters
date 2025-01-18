@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 
 // characters, id, 
 export type CharacterData = 
@@ -81,6 +82,26 @@ export type BadgeData = {
 //     return testCharacter;
 // }
 
+export function createEmptyCharacterProfileData(){
+    const data: CharacterProfileData = {
+        id: nanoid(),
+        name: '',
+        hp: 0,
+        will: 0,
+        age: 0,
+        rank: '',
+        nature: '',
+        confidence: 0,
+        money: 0,
+        concept: '',
+        achievements: [{label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}],
+        badges: generateBadgeData(),
+        currentPokemon: ['','','','','','',],
+    }
+
+    return data;
+}
+
 export function createRandomCharacterProfileData(){
     const testCharacter: CharacterProfileData = {
         id: 'test',
@@ -94,14 +115,14 @@ export function createRandomCharacterProfileData(){
         money: 2000,
         concept: 'gardener',
         achievements: [{label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}, {label:'', completed: false}],
-        badges: generateRandomBadgeData(),
+        badges: generateBadgeData(),
         currentPokemon: ['','','','','','',],
     }
 
     return testCharacter;
 }
 
-export function generateRandomBadgeData(){
+export function generateBadgeData(){
     const badges: BadgeData[] = [];
 
     for (let index = 0; index < 8; index++) {
@@ -148,6 +169,6 @@ export function loadCharacterProfileData(id: string){
         return character;
     }
     else{
-        return undefined;
+        return createEmptyCharacterProfileData();
     }
 }
