@@ -1,6 +1,5 @@
 'use client'
 // import Image from "next/image";
-import  { SkillData, SkillGroup } from "./components/SkillBox";
 import styles from "./page.module.css";
 import './styles/styles.css'
 import './styles/Page.css'
@@ -15,7 +14,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
-  
+  const [characterID, setCharacterID] = useState('test');
 //   useEffect(() =>{
 //     saveCharacterProfileData(createRandomCharacterProfileData())
 // })
@@ -37,7 +36,7 @@ export default function Home() {
 
               </div>
               {currentPage == 0 &&
-                <ProfilePage characterID="test"/>
+                <ProfilePage characterID={characterID}/>
               }
               {currentPage == 1 &&
                <ItemsPage />
@@ -51,7 +50,7 @@ export default function Home() {
 
           <div className="Page_rightSide">
             <div className="Page_rightSideContent">
-              <StatPage/>
+              <StatPage id={characterID}/>
             </div>
           </div>
         </div>

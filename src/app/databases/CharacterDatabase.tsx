@@ -1,4 +1,6 @@
 import { nanoid } from "nanoid";
+import { SkillData } from "../components/SkillBox";
+import { getSkillGroupName, getSkillName, SkillGroups, SkillGroupsLUT, Skills } from "../helpers/StatsHelper";
 
 // characters, id, 
 export type CharacterData = 
@@ -8,11 +10,17 @@ export type CharacterData =
    
 }
 
+export type AttributeData = {
+    label: string;
+    maxValue: number;
+    currentValue: number;
+}
+
 export type CharacterSkillData = {
     id: string,
-    skills: number[];
-    attributes: number[];
-    socialAttributes: number[];
+    skills: SkillData[];
+    attributes: AttributeData[];
+    socialAttributes: AttributeData[];
 }
 
 export type CharacterProfileData = {
@@ -42,6 +50,8 @@ export type BadgeData = {
     image?: string,
     obtained?: boolean,
 }
+
+
 
 
 // Saving data
@@ -171,4 +181,75 @@ export function loadCharacterProfileData(id: string){
     else{
         return createEmptyCharacterProfileData();
     }
+}
+
+
+function characterSkillsPath(id: string){
+    return `characters/${id}/skillData`;
+}
+
+export function saveCharacterSkillData(data: CharacterSkillData){
+    const dataString = JSON.stringify(data);
+    localStorage.setItem(characterSkillsPath(data.id), dataString);
+}
+
+export function loadCharacterSkillData(id: string){
+    const path = characterSkillsPath(id);
+    const data = localStorage.getItem(path);
+
+    if(data){
+        const skillData = JSON.parse(data);
+        return skillData;
+    }
+    else{
+        return createEmptyCharacterSkillData(id);
+    }
+}
+
+
+
+export function createEmptyCharacterSkillData(id: string){
+    const skillsData: SkillData[] = [];
+
+    for (let i = 0; i < SkillGroups._Length; i++) {
+        const skills: Skills[] = SkillGroupsLUT[i];
+
+        for (let j = 0; j < skills.length; j++) {
+            const skillData: SkillData = {
+                type: skills[j],
+                label: getSkillName(skills[j]), 
+                category: getSkillGroupName(i), 
+                maxValue: 5, 
+                currentValue: 0,
+            }
+
+            skillsData.push(skillData);
+        }
+        
+    }
+
+    const attributes: AttributeData[] = [];
+
+    attributes.push({label: 'Strength', maxValue: 5, currentValue: 0});
+    attributes.push({label: 'Dexterity', maxValue: 5, currentValue: 0});
+    attributes.push({label: 'Vitality', maxValue: 5, currentValue: 0});
+    attributes.push({label: 'Insight', maxValue: 5, currentValue: 0});
+
+
+    const socialAttributes: AttributeData[] = [];
+
+    socialAttributes.push({label: 'Tough', maxValue: 5, currentValue: 0});
+    socialAttributes.push({label: 'Cool', maxValue: 5, currentValue: 0});
+    socialAttributes.push({label: 'Beautify', maxValue: 5, currentValue: 0});
+    socialAttributes.push({label: 'Clever', maxValue: 5, currentValue: 0});
+    socialAttributes.push({label: 'Cute', maxValue: 5, currentValue: 0});
+
+    const charactersSkillData: CharacterSkillData ={
+        id,
+        skills: skillsData,
+        attributes,
+        socialAttributes,
+    }
+ 
+    return charactersSkillData;
 }

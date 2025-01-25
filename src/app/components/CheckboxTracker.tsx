@@ -7,7 +7,7 @@ type Props = ComponentProps & {
     label: string,
     maxValue: number,
     currentValue: number,
-    onValueChange?: (value: number) => void,
+    onValueChange?: (value: number, customData?: unknown) => void,
 }
 
 export default function CheckboxTracker (props: Props){
@@ -59,7 +59,7 @@ export default function CheckboxTracker (props: Props){
         }
 
         if(newValue != currentValue){
-            props.onValueChange?.(newValue);
+            props.onValueChange?.(newValue, props.customData);
         }
 
         setCurrentValue(newValue);        
