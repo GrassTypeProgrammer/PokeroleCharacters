@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import { SkillData } from "../components/SkillBox";
 import { getSkillGroupName, getSkillName, SkillGroups, SkillGroupsLUT, Skills } from "../helpers/StatsHelper";
 
@@ -53,48 +52,9 @@ export type BadgeData = {
 
 
 
-
-// Saving data
-// const taskIDsString = JSON.stringify(taskIDs);
-// localStorage.setItem(taskIDsPath(boardID), taskIDsString);
-
-// Deleting data
-// localStorage.removeItem(taskID);
-
-// Getting data
-// let taskIDs = JSON.parse(localStorage.getItem(taskIDsPath(boardID)));
-
-
-// Todo make this random data
-// export function createTestCharacter(){
-//     const testCharacter: CharacterData = {
-//         id: 'test',
-//         profileData: {
-//             name: 'Flint',
-//             hp: 3,
-//             will: 4,
-//             age: 17,
-//             rank: 'beginner',
-//             nature: 'brave',
-//             confidence: 9,
-//             money: 2000,
-//             concept: 'gardener',
-//             achievements: [{label:'test', completed: true}],
-//             badges: [true, false,false,false,false,false,false,false,],
-//         },
-//         currentPokemon: ['Pikachu'],
-//         items: ['Potion x1'],
-//         skills: [3, 2, 1],
-//         attributes: [1, 2, 3],
-//         socialAttributes: [5, 4, 3],
-//     }
-
-//     return testCharacter;
-// }
-
 export function createEmptyCharacterProfileData(){
     const data: CharacterProfileData = {
-        id: nanoid(),
+        id: 'test',
         name: '',
         hp: 0,
         will: 0,
@@ -188,6 +148,10 @@ function characterSkillsPath(id: string){
     return `characters/${id}/skillData`;
 }
 
+function characterItemsPath(id: string){
+    return `characters/${id}/itemsData`;
+}
+
 export function saveCharacterSkillData(data: CharacterSkillData){
     const dataString = JSON.stringify(data);
     localStorage.setItem(characterSkillsPath(data.id), dataString);
@@ -205,7 +169,6 @@ export function loadCharacterSkillData(id: string){
         return createEmptyCharacterSkillData(id);
     }
 }
-
 
 
 export function createEmptyCharacterSkillData(id: string){
@@ -252,4 +215,30 @@ export function createEmptyCharacterSkillData(id: string){
     }
  
     return charactersSkillData;
+}
+
+
+// Items
+export function loadCharacterItemsData(id: string): string[]{
+    const path = characterItemsPath(id);
+    const data = localStorage.getItem(path);
+    
+    if(data){
+        const itemsData = JSON.parse(data);
+        return itemsData;
+    }
+    else{
+        const items: string[] = [];
+
+        for (let index = 0; index < 18; index++) {
+            items.push('');            
+        }
+        
+        return items;
+    }
+}
+
+export function saveCharacterItemsData(id: string, items: string[]){
+    const itemsString = JSON.stringify(items);
+    localStorage.setItem(characterItemsPath(id), itemsString);
 }

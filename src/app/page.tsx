@@ -39,7 +39,7 @@ export default function Home() {
                 <ProfilePage characterID={characterID}/>
               }
               {currentPage == 1 &&
-               <ItemsPage />
+               <ItemsPage characterID={characterID}/>
               }
               
               <div className="Page_leftSideFooter">
