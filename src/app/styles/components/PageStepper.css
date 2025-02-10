@@ -1,10 +1,30 @@
 .PageStepper_root{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
-.PageStepper_arrow{
-    width: 100px;
+.PageStepper_arrowButton{
+    flex-direction: column;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    background-color: var(--whiteColor);
+    border-style: solid;
+    border-radius: var(--borderRadiusSmall);
+    border-width: 2px;
+    border-color: var(--blackColor);
+    transition: 0.15s;
+}
+.PageStepper_arrowButton:hover{
+    background-color: var(--whiteColorSecondary);
+}
+.PageStepper_arrowButton:active{
+    background-color: var(--whiteColorTertiary);
+}
+
+.PageStepper_leftArrow{
+    transform: Rotate(180deg);
 }
 
 .PageStepper_dotOuter{

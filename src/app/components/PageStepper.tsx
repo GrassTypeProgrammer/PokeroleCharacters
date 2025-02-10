@@ -2,6 +2,7 @@ import './../styles/components/PageStepper.css'
 import classNames from 'classnames'
 import { ComponentProps } from "./Component"
 import { ReactNode, useState } from 'react';
+import Icon from './Icon';
 
 
 type Props = ComponentProps & {
@@ -45,8 +46,19 @@ export default function PageStepper (props: Props){
     }
 
     return <div className={classNames('PageStepper_root', props.baseClassName, props.classModifiers)}>
-            <button className='PageStepper_arrow' onClick={onSelectLeft}>left</button>
+            <button className='PageStepper_arrowButton' onClick={onSelectLeft}>
+                <Icon 
+                    baseClassName='PageStepper_leftArrow'
+                    src='icons/general/DoubleArrow.svg' 
+                    alt='Arrow pointing right'
+                />
+            </button>
             {dots}
-            <button className='PageStepper_arrow right' onClick={onSelectRight}>right</button>
+            <button className='PageStepper_arrowButton' onClick={onSelectRight}>
+                <Icon 
+                    src='icons/general/DoubleArrow.svg' 
+                    alt='Arrow pointing left'
+                />
+            </button>
         </div>
 }
