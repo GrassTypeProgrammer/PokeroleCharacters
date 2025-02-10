@@ -46,15 +46,20 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-top: 80px;
-    padding: 15px;
-    padding-top: 100px;
-    background-color: var(--whiteColor);
     border-radius: var(--borderRadius);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    clip-path: polygon(100% 100%, 0% 100%, 0% 0%, 30% 0%, 45% 10%, 100% 10%);
     max-width: 750px;
+    position: relative;
+}
+.Page_rightSideBackground{
+    flex: 1;
+    background-color: var(--whiteColor);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 134px;
+    bottom: 0;
 }
 
 .Page_rightSideContent{
@@ -79,14 +84,6 @@
     margin-bottom: 10px;
 }
 
-.Page_leftSideFooter{
-    display: flex;
-    flex-direction: row;
-    max-height: 30px;
-    flex: 1;
-    margin-top: 10px;
-    justify-content: center;
-}
 
 
 

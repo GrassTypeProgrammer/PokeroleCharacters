@@ -2,6 +2,21 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    position: relative;
+}
+.StatPage_content{
+    /* margin-top: 80px; */
+    padding: 15px;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.StatPage_topBorder{
+    position: absolute;
+    width: 100%;
+    height: 135px;
 }
 
 .StatPage_attributeContainer{

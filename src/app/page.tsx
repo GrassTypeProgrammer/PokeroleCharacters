@@ -10,6 +10,7 @@ import PageBackground from "./pages/PageBackground";
 import ItemsPage from "./pages/ItemsPage";
 import PageStepper from "./components/PageStepper";
 import { useState } from "react";
+import Footer from "./components/Footer";
 
 
 export default function Home() {
@@ -28,7 +29,7 @@ export default function Home() {
 
         <div className="Page_pokedex">
           <div className="Page_leftSide">
-            <HeaderBar />
+            <HeaderBar isLeftSide={true}/>
             <div className="Page_leftSideContent">
             <PageBackground src='/PlaceholderCharacter.png'/>
 
@@ -39,20 +40,21 @@ export default function Home() {
                 <ProfilePage characterID={characterID}/>
               }
               {currentPage == 1 &&
-               <ItemsPage characterID={characterID}/>
+                <ItemsPage characterID={characterID}/>
               }
               
-              <div className="Page_leftSideFooter">
-                <PageStepper pages={2} onPageChange={(currentPage: number) => {setCurrentPage(currentPage)}}/>
-              </div>
             </div>
+                <Footer isLeftSide={true}>
+                    <PageStepper pages={2} onPageChange={(currentPage: number) => {setCurrentPage(currentPage)}}/>
+                </Footer>
           </div>
 
           <div className="Page_rightSide">
-            <div className="Page_rightSideContent">
-              <StatPage id={characterID}/>
-            </div>
+            <HeaderBar />
+            <div className="Page_rightSideBackground"/>
+                <StatPage id={characterID}/>
           </div>
+
         </div>
         </div>
         
