@@ -122,8 +122,8 @@ export default function StatPage (props: Props) {
 
     return <div className='ProfilePage_root'>
         <div className='ProfilePage_top'>
-            <div className='ProfilePage_column gap width-medium'>
-                <div className='ProfilePage_row'>
+            <div className='ProfilePage_column gap'>
+                <div className='ProfilePage_row gap'>
                     <EditableTextField 
                         baseClassName='ProfilePage_editableTextField flex'
                         label='Age:'
@@ -142,7 +142,7 @@ export default function StatPage (props: Props) {
                     />
                 </div>
                  
-                <div className='ProfilePage_row'>
+                <div className='ProfilePage_row gap'>
                     <EditableTextField 
                         baseClassName='ProfilePage_editableTextField flex'
                         label='Nature:'
@@ -161,25 +161,26 @@ export default function StatPage (props: Props) {
                     />
                 </div>
 
-                <EditableTextField 
-                    baseClassName='ProfilePage_editableTextField'
-                    label='Money:'
-                    id='Money' 
-                    value={profileData.money.toString()} 
-                    onSubmit={onSubmit}
-                    customData={DataPoints.Money}
-                />
+                <div className='ProfilePage_row gap'>
+                    <EditableTextField 
+                        baseClassName='ProfilePage_editableTextField'
+                        label='Concept:'
+                        id='Concept' 
+                        value={profileData.concept} 
+                        onSubmit={onSubmit}
+                        customData={DataPoints.Concept}
+                    />
+                    <EditableTextField 
+                        baseClassName='ProfilePage_editableTextField'
+                        label='Money:'
+                        id='Money' 
+                        value={profileData.money.toString()} 
+                        onSubmit={onSubmit}
+                        customData={DataPoints.Money}
+                    />
+                </div>
 
-                <EditableTextField 
-                    baseClassName='ProfilePage_editableTextField'
-                    label='Concept:'
-                    id='Concept' 
-                    value={profileData.concept} 
-                    onSubmit={onSubmit}
-                    customData={DataPoints.Concept}
-                />
-
-                <div className='ProfilePage_row'>
+                <div className='ProfilePage_row gap'>
                     <EditableTextField 
                         baseClassName='ProfilePage_editableTextField flex'
                         label='HP:'
