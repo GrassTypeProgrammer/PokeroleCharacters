@@ -2,6 +2,7 @@ import './../styles/components/PokeLabel.css'
 import classNames from "classnames"
 import { ComponentProps } from "./Component"
 import { useState } from 'react';
+import Icon from './Icon';
 
 type Props = ComponentProps & {
     label: string;
@@ -43,14 +44,24 @@ export default function PokeLabel (props: Props) {
     return <div className={classNames('PokeLabel_root', props.baseClassName, props.classModifiers)}
                 onClick={onSelect}
             >
-            <div className="PokeLabel_ball"/>
-            {editMode ?
-                <form id={`EditableTextField_${props.id}`} onSubmit={handleSubmit}>
-                    <input onBlur={onLoseFocus} autoFocus className='EditableTextField_input' type='text' defaultValue={props.label} onChange={handleChange}/>
-                </form>
-                :
-                <div className="PokeLabel_label">{props.label}</div>
-            }
-    </div>
+                <div className="PokeLabel_background"/>
+                <div className="PokeLabel_content">
+                    <div className="PokeLabel_pokeballContainer">
+                        <Icon 
+                            src='icons/general/Pokeball.svg' 
+                            // baseClassName='PokeLabel_ball'
+                            alt='pokeball'
+                            />
+                    </div>
+                    {/* <div className="PokeLabel_ball"/> */}
+                    {editMode ?
+                        <form id={`EditableTextField_${props.id}`} onSubmit={handleSubmit}>
+                            <input onBlur={onLoseFocus} autoFocus className='EditableTextField_input' type='text' defaultValue={props.label} onChange={handleChange}/>
+                        </form>
+                        :
+                        <div className="PokeLabel_label">{props.label}</div>
+                    }
+                </div>
+            </div>
 
 }

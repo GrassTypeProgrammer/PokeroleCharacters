@@ -1,21 +1,49 @@
 .PokeLabel_root{
-    background-color: var(--whiteColor);
     display: flex;
     flex-direction: row;
-    height: 30px;
-    width: 200px;
+    height: 32px;
+    width: 300px;
     border-radius: var(--borderRadius);
-    /* TODO See what this border looks like above the ball */
     border: solid 2px var(--blackColor);
+    position: relative;
+}
+
+.PokeLabel_content{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding-left: 40px;
     align-items: center;
+    position: relative;
+}
+
+.PokeLabel_background{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: var(--whiteColor);
+    opacity: 0.5;
+    border-radius: var(--borderRadius);
+}
+
+.PokeLabel_pokeballContainer{
+    height: 40px;
+    width: 40px;
+    margin-left: -2px;
+    position: absolute;
+    left: -5px;
+    top: -5px;
 }
 
 .PokeLabel_ball{
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background-color: var(--pokedexSecondary);
-    margin-left: -2px;
+    height: 40px;
+    width: 40px;
 }
 
 .PokeLabel_label{
