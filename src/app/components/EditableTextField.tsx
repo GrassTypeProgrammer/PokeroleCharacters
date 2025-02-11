@@ -47,16 +47,19 @@ export default function EditableTextField (props: Props) {
     return  <div className={classNames('EditableTextField_root', props.baseClassName, props.classModifiers)}
                 onClick={onSelect}
             >
-                {props.label &&
-                    <div className='EditableTextField_label'>{props.label}</div>
-                }
-                {editMode ?
-                    <form id={`EditableTextField_${props.id}`} onSubmit={handleSubmit}>
-                        <input onBlur={onLoseFocus} autoFocus className='EditableTextField_input' type='text' defaultValue={props.value} onChange={handleChange}/>
-                    </form>
-                    :
-                    <div className='EditableTextField_value'>{props.value}</div>
-                }
+                <div className="EditableTextField_background"/>
+                <div className={classNames("EditableTextField_content", props.classModifiers)}>
+                    {props.label &&
+                        <div className='EditableTextField_label'>{props.label}</div>
+                    }
+                    {editMode ?
+                        <form id={`EditableTextField_${props.id}`} onSubmit={handleSubmit}>
+                            <input onBlur={onLoseFocus} autoFocus className='EditableTextField_input' type='text' defaultValue={props.value} onChange={handleChange}/>
+                        </form>
+                        :
+                        <div className='EditableTextField_value'>{props.value}</div>
+                    }
+                </div>
             </div>
 
 }

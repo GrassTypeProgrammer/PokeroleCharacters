@@ -2,15 +2,42 @@
 .EditableTextField_root{
     display: flex;
     flex-direction: row;
-    gap: 20px;
-    padding: 8px 10px;
+    width: 230px;
+    height: 40px;
     border-color: var(--blackColor);
     border-width: 4px;
     border-style: solid;
     border-radius: var(--borderRadius);
+    position: relative;
 }
 .EditableTextField_root.center{
     justify-content: center;
+}
+
+.EditableTextField_content{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    gap: 20px;
+    padding: 8px 10px;
+}
+.EditableTextField_content.center{
+    justify-content: center;
+}
+
+.EditableTextField_background{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: var(--whiteColor);
+    opacity: 0.5;
+    border-radius: var(--borderRadius);
 }
 
 .EditableTextField_label{
