@@ -51,17 +51,20 @@ export default function CheckboxLabel(props: Props){
     }
     
     return <div className={classNames('CheckboxLabel_root', props.baseClassName, props.classModifiers)}>
-            {!props.hideCheckbox &&
-                <input type='checkbox' className='CheckboxLabel_checkbox' defaultChecked={props.checked} onChange={handleCheckboxChange}/>
-            }
             
-            {editMode ?
+            {!editMode ?
                 <form id={`CheckboxLabel_${props.id}`} className={'CheckboxLabel_form'} onSubmit={handleSubmit}>
-                    <input onBlur={onLoseFocus} autoFocus className='CheckboxLabel_input' type='text' defaultValue={props.label} onChange={handleChange}/>
+                    <input onBlur={onLoseFocus} autoFocus className='CheckboxLabel_inputLabel' type='text' defaultValue={props.label} onChange={handleChange}/>
                 </form>
                 :
-                <div onClick={onSelect} className="CheckboxLabel_label">{props.label}</div>
+                <div onClick={onSelect} className="CheckboxLabel_inputLabel">{props.label}</div>
             }
         
+            {!props.hideCheckbox &&
+            <label className='CheckboxLabel_container'>
+                <input type='checkbox'  defaultChecked={props.checked} onChange={handleCheckboxChange}/>
+                <span className='CheckboxLabel_checkbox'/>
+            </label>
+            }
     </div>
 }
