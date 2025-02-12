@@ -10,11 +10,11 @@ type Props = ComponentProps & {
 
 export default function Icon(props: Props){
     return <Image
-    className={classNames('Icon_root', props.baseClassName, props.classModifiers)}
-    src={props.src}
-    alt={props.alt}
-    width={0}
-    height={0}
-    sizes='100vw'
-/>
+        className={classNames('Icon_root', props.baseClassName, props.classModifiers)}
+        src={props.src}
+        alt={props.alt}
+        width={0}
+        height={0}
+        sizes='100vw'
+    />
 }
