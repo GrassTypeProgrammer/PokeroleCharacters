@@ -3,7 +3,7 @@
 .SkillBox_root{
     display: flex;
     flex-direction: row;
-    width: 160px;
+    width: 240px;
     position: relative;
 }
 
@@ -23,25 +23,9 @@
     gap: 4px;
 }
 
-.SkillBox_tabContainer{
-    display: flex;
-    flex-direction: column;
-    padding: 15px 0;
-    justify-content: space-evenly;
-    position: absolute;
-    right: -23px;
-    top: 0;
-    bottom: 0;
-}
-
-.SkillBox_tab{
-    background-color: var(--pokedexSecondary);
-    writing-mode: vertical-lr;
-    height: 152px;
-    padding-right: 5px;
-    text-align: center;
-    border-top-right-radius: var(--borderRadius);
-    border-bottom-right-radius: var(--borderRadius);
-    color: var(--whiteColor);
+.SkillBox_header{
+    font-size: 18px;
+    font-weight: bold;
     text-transform: uppercase;
+    text-align: center;
 }

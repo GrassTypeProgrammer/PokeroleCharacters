@@ -59,7 +59,8 @@ export default function SkillBox (props: Props) {
             }
 
             skillNodes.push(<CheckboxTracker 
-                classModifiers='small' {...skill} 
+                {...skill}
+                classModifiers='small row'  
                 key={`CheckboxTracker_${skillCategory}_${nanoid()}`} 
                 onValueChange={onValueChange}
                 customData={customData}
@@ -67,7 +68,10 @@ export default function SkillBox (props: Props) {
         }
 
         return <div className="SkillBox_skillGroup" key={`SkillBox_skillGroup_${skillCategory}_${nanoid()}`}>
-         {skillNodes}
+            <div className='SkillBox_header'>
+                {skillCategory}
+            </div>
+            {skillNodes}
          </div>
     }
 
@@ -94,30 +98,9 @@ export default function SkillBox (props: Props) {
         }
     }
 
-    function createTabs(){
-        const tabs: ReactNode[] = [];
-
-        for (let index = 0; index < skillGroups.length; index++) {
-            const group = skillGroups[index];
-            const skillCategory = group.skills.length > 0 ? group.skills[0].category : '';
-
-            const node = <div className="SkillBox_tab" key={`SkillBox_tab_${skillCategory}_${nanoid()}`}>
-                    {skillCategory}
-                </div>
-
-            tabs.push(node);
-        }
-
-        return tabs;
-    }
-
     return <div className={classNames('SkillBox_root', props.baseClassName, props.classModifiers)}>
         <div className="SkillBox_skillContainer">
            {createSkillNodes()}
-        </div>
-        
-        <div className="SkillBox_tabContainer">
-            {createTabs()}
         </div>
     </div>
 }
