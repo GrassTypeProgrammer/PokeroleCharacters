@@ -12,7 +12,9 @@
 .ProfilePage_row.gap{
     gap: 10px;
 }
-
+.ProfilePage_row.space-between{
+    justify-content: space-between;
+}
 
 
 .ProfilePage_image{
@@ -57,10 +59,32 @@
 .ProfilePage_column.gap{
     gap: 13px;
 }
+.ProfilePage_column.gap-small{
+    gap: 6px;
+}
+
 .ProfilePage_column.justify-end{
     justify-content: flex-end;
 }
 .ProfilePage_column.width-medium{
     width: 400px;
+}
+
+.ProfilePage_subtitle{
+    font-size: 22px;
+    text-align: center;
+    text-shadow: 0 2px 2px rgba(var(--pokedexSecondary-rgb), .5);
+    margin-bottom: 5px;
+}
+
+.ProfilePage_hDivider{
+   position: absolute;
+   top: 285px;
+}
+
+.ProfilePage_vDivider{
+    position: absolute;
+    left: 360px;
+    bottom: 5px;
 }
 

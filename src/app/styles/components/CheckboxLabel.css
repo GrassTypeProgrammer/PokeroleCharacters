@@ -13,7 +13,7 @@
 
 .CheckboxLabel_inputLabel{
     padding: 5px 40px 5px 10px;
-    border: solid 2px var(--blackColor);
+    border: solid var(--borderWidth) var(--blackColor);
     border-radius: var(--borderRadius);
     height: 32px;
     flex: 1;
@@ -48,7 +48,7 @@
 }
 
 .CheckboxLabel_checkbox {
-    border: 2px solid var(--blackColor);
+    border: var(--borderWidth) solid var(--blackColor);
     display: inline-block;
     border-radius: 50%;
     flex: 1;

@@ -12,7 +12,7 @@
     background-color: var(--whiteColor);
     border-style: solid;
     border-radius: var(--borderRadiusSmall);
-    border-width: 2px;
+    border-width: var(--borderWidth);
     border-color: var(--blackColor);
     transition: 0.15s;
 }

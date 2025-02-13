@@ -5,7 +5,7 @@
     width: 230px;
     height: 40px;
     border-color: var(--blackColor);
-    border-width: 4px;
+    border-width: var(--borderWidthThick);
     border-style: solid;
     border-radius: var(--borderRadius);
     position: relative;

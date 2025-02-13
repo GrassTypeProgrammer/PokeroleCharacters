@@ -1,7 +1,5 @@
 import { ComponentProps } from "./Component";
-import Image from "next/image"
 import './../styles/components/Divider.css'
-import classNames from "classnames";
 import { useState } from "react";
 import Icon from "./Icon";
 
@@ -23,12 +21,12 @@ export default function Divider(props: Props){
 
         switch(type){
             case DividerType.Straight:
-                icon = 'dexDecorations/DividerStraightLine.svg';
+                icon = 'dexDecorations/DividerLineStraight.svg';
                 break;
-            case DividerType.Straight:
+            case DividerType.Bend:
                 icon = 'dexDecorations/DividerLineBend.svg';
                 break;
-            case DividerType.Straight:
+            case DividerType.PartialBend:
                 icon = 'dexDecorations/DividerLinePartialBend.svg';
                 break;
         }

@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: row;
     height: 32px;
+    margin-top: 4px;
+    margin-bottom: 4px;
     width: 300px;
     border-radius: var(--borderRadius);
-    border: solid 2px var(--blackColor);
+    border: solid var(--borderWidth) var(--blackColor);
     position: relative;
 }
 

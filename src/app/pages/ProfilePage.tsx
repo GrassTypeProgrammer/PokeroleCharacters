@@ -7,6 +7,7 @@ import BadgeList from '../components/BadgeList'
 import PokeLabel from '../components/PokeLabel'
 import CheckboxLabel from '../components/CheckboxLabel'
 import { BadgeData, CharacterProfileData, loadCharacterProfileData, saveCharacterProfileData } from '../databases/CharacterDatabase'
+import Divider, { DividerType } from '../components/Divider'
 
 enum DataPoints{
     Name,
@@ -222,18 +223,31 @@ export default function StatPage (props: Props) {
             </div>
         </div>
 
+        <Divider 
+            baseClassName='ProfilePage_hDivider' 
+            type={DividerType.Bend}
+            classModifiers='noDefaultSize'    
+        />
+
         <div className='ProfilePage_bottom'>
-            <div className="ProfilePage_row gap">
-                <div className="ProfilePage_column gap">
+            <div className="ProfilePage_row space-between gap">
+                <div className="ProfilePage_column gap-small justify-end ">
                     {createPokelables()}
-                   </div>
-                <div className="ProfilePage_column gap">
-                    <div>Achievements</div>
+                </div>
+
+                <Divider 
+                    baseClassName='ProfilePage_vDivider' 
+                    type={DividerType.Straight}
+                    classModifiers='noDefaultSize'    
+                />
+                
+                <div className="ProfilePage_column gap-small justify-end">
+                    <div className='ProfilePage_subtitle'>Achievements</div>
                     {createAchievements()}
                 </div>
             </div>
 
-            <BadgeList badges={profileData.badges} onChange={onBadgesChange} />
+            {/* <BadgeList badges={profileData.badges} onChange={onBadgesChange} /> */}
         </div>
     </div>
 }

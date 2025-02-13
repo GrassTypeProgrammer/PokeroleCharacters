@@ -20,11 +20,15 @@
 
     /* RGB Colors */
     --whiteColor-rgb: 250, 245, 236;
-
+    --pokedexSecondary-rgb: 163, 79, 47;
+    
     /* px sizes */
     --borderRadiusSmall: 15px;
     --borderRadius: 20px;
     /* --borderRadiusLarge:  */
+
+    --borderWidth: 2px;
+    --borderWidthThick: 4px;
 }
 
 
