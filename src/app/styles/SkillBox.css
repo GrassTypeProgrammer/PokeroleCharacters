@@ -1,20 +1,13 @@
 
-
 .SkillBox_root{
     display: flex;
-    flex-direction: row;
-    width: 240px;
-    position: relative;
-}
-
-.SkillBox_skillContainer{
-    display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     background-color: var(--pokedexPrimary);
     border-radius: var(--borderRadius);
     padding: 30px 15px;
     flex: 1;
+    justify-content: center;
 }
 
 .SkillBox_skillGroup{

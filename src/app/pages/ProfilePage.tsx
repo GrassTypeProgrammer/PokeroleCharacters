@@ -226,7 +226,6 @@ export default function StatPage (props: Props) {
         <Divider 
             baseClassName='ProfilePage_hDivider' 
             type={DividerType.Bend}
-            classModifiers='noDefaultSize'    
         />
 
         <div className='ProfilePage_bottom'>
@@ -238,7 +237,6 @@ export default function StatPage (props: Props) {
                 <Divider 
                     baseClassName='ProfilePage_vDivider' 
                     type={DividerType.Straight}
-                    classModifiers='noDefaultSize'    
                 />
                 
                 <div className="ProfilePage_column gap-small justify-end">

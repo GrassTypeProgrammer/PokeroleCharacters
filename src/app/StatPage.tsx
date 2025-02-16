@@ -7,6 +7,7 @@ import { CharacterSkillData, loadCharacterSkillData, saveCharacterSkillData, } f
 import { ReactNode,  useState } from 'react'
 import { Attributes, Skills, SocialAttributes } from './helpers/StatsHelper'
 import Footer from './components/Footer'
+import Divider, { DividerType } from './components/Divider'
 
 type Props = ComponentProps & {
     id: string,
@@ -45,10 +46,9 @@ export default function StatPage (props: Props) {
         saveCharacterSkillData(updatedData);
     }
 
-    function createSkillBoxes():ReactNode[]{
-        const skillBoxes: ReactNode[] = [];
+    function createSkillBox():ReactNode{
 
-        const skills = data.skills;
+        const skills: SkillData[] = data.skills;
         const groups: SkillGroup[] = [];
         let index = 0;
 
@@ -66,20 +66,7 @@ export default function StatPage (props: Props) {
             index += 4;
         }
 
-        for (let x = 0; x < groups.length; x++) {
-            const group: SkillGroup[] = [];
-            const key = 'skillBox_' + x;
-            group.push(groups[x]);
-
-            if(x + 1 < groups.length){
-                x++;
-                group.push(groups[x]);
-            }
-
-            skillBoxes.push(<SkillBox onChange={onSkillBoxesChange} key={key} skillGroups={group}/>)
-        }
-
-        return skillBoxes;
+        return <SkillBox onChange={onSkillBoxesChange} key={'key'} skillGroups={groups}/>;
     }
 
     function onAttributeChange(value: number, customData: unknown){
@@ -111,27 +98,41 @@ export default function StatPage (props: Props) {
 
             <div className='StatPage_row'>
                 <div className='StatPage_skillGroups'>
-                    {createSkillBoxes()}
+                    {createSkillBox()}
                 </div>
             </div>
 
-            <div className='StatPage_column'>
-                <div className="StatPage_attributeContainer">
+            <Divider baseClassName='StatPage_vDivider' type={DividerType.StraightLong}/>
+
+            <div className='StatPage_attributeContainer'>
+                <div className="StatPage_attributeGroupContainer">
                     {/* TODO Make these via a function */}
-                    <AttributeBox onValueChange={onAttributeChange} label={"Strength"} maxValue={5} currentValue={data.attributes[Attributes.Strength].currentValue} customData={Attributes.Strength}/>
-                    <AttributeBox onValueChange={onAttributeChange} label={"Dexterity"} maxValue={5} currentValue={data.attributes[Attributes.Dexterity].currentValue} customData={Attributes.Dexterity}/>
-                    <AttributeBox onValueChange={onAttributeChange} label={"Vitality"} maxValue={5} currentValue={data.attributes[Attributes.Vitality].currentValue} customData={Attributes.Vitality}/>
-                    <AttributeBox onValueChange={onAttributeChange} label={"Insight"} maxValue={5} currentValue={data.attributes[Attributes.Insight].currentValue} customData={Attributes.Insight}/>
+                    <div className="StatPage_attributeRow justify-end">
+                        <AttributeBox onValueChange={onSocialAttributeChange} label={"Cute"} classModifiers='cute' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Cute].currentValue} customData={SocialAttributes.Cute}/>
+                    </div>
+                    <div className="StatPage_attributeRow">
+                        <AttributeBox onValueChange={onSocialAttributeChange} label={"Tough"} classModifiers='tough' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Tough].currentValue} customData={SocialAttributes.Tough}/>
+                        <AttributeBox onValueChange={onSocialAttributeChange} label={"Cool"} classModifiers='cool' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Cool].currentValue} customData={SocialAttributes.Cool}/>
+                    </div>
+                    <div className="StatPage_attributeRow">
+                        <AttributeBox onValueChange={onSocialAttributeChange} label={"Beauty"} classModifiers='beauty' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Beautify].currentValue} customData={SocialAttributes.Beautify}/>
+                        <AttributeBox onValueChange={onSocialAttributeChange} label={"Clever"} classModifiers='clever' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Clever].currentValue} customData={SocialAttributes.Clever}/>
+                    </div>
                 </div>
-                {/* <div className="StatPage_attributeContainer">
-                    <AttributeBox onValueChange={onSocialAttributeChange} label={"Tough"} classModifiers='tough' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Tough].currentValue} customData={SocialAttributes.Tough}/>
-                    <AttributeBox onValueChange={onSocialAttributeChange} label={"Cool"} classModifiers='cool' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Cool].currentValue} customData={SocialAttributes.Cool}/>
-                    <AttributeBox onValueChange={onSocialAttributeChange} label={"Beauty"} classModifiers='beauty' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Beautify].currentValue} customData={SocialAttributes.Beautify}/>
-                    <AttributeBox onValueChange={onSocialAttributeChange} label={"Clever"} classModifiers='clever' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Clever].currentValue} customData={SocialAttributes.Clever}/>
+
+                <Divider baseClassName='StatPage_hDivider' type={DividerType.PartialBend}/>
+
+                <div className="StatPage_attributeGroupContainer">
+                    {/* TODO Make these via a function */}
+                    <div className="StatPage_attributeRow">
+                        <AttributeBox onValueChange={onAttributeChange} label={"Strength"} maxValue={5} currentValue={data.attributes[Attributes.Strength].currentValue} customData={Attributes.Strength}/>
+                        <AttributeBox onValueChange={onAttributeChange} label={"Dexterity"} maxValue={5} currentValue={data.attributes[Attributes.Dexterity].currentValue} customData={Attributes.Dexterity}/>
+                    </div>
+                    <div className="StatPage_attributeRow">
+                        <AttributeBox onValueChange={onAttributeChange} label={"Vitality"} maxValue={5} currentValue={data.attributes[Attributes.Vitality].currentValue} customData={Attributes.Vitality}/>
+                        <AttributeBox onValueChange={onAttributeChange} label={"Insight"} maxValue={5} currentValue={data.attributes[Attributes.Insight].currentValue} customData={Attributes.Insight}/>
+                    </div>
                 </div>
-                <div className="StatPage_attributeContainer">
-                    <AttributeBox onValueChange={onSocialAttributeChange} label={"Cute"} classModifiers='cute' maxValue={5} currentValue={data.socialAttributes[SocialAttributes.Cute].currentValue} customData={SocialAttributes.Cute}/>
-                </div> */}
             </div>
         </div>
 

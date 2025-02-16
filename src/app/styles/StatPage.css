@@ -5,12 +5,12 @@
     position: relative;
 }
 .StatPage_content{
-    /* margin-top: 80px; */
-    padding: 15px;
-    padding-top: 100px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex: 1;
+    padding: 26px;
+    padding-top: 65px;
+    justify-content: space-between;
 }
 
 .StatPage_topBorder{
@@ -19,16 +19,33 @@
     height: 135px;
 }
 
-.StatPage_attributeContainer{
+.StatPage_attributeGroupContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.StatPage_attributeRow{
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    justify-content: space-between;
+    gap: 16px;
+}
+.StatPage_attributeRow.justify-end{
+    justify-content: flex-end;
 }
 
 .StatPage_socialAttributeContainer{
     display: flex;
+    flex-direction: row;
+    width: 380px;
+    gap: 12px; 
+    justify-content: space-between;
+}
+
+.StatPage_attributeContainer{
+    display: flex;
     flex-direction: column;
-    gap: 5px; 
     justify-content: space-between;
 }
 
@@ -42,7 +59,6 @@
 .StatPage_row{
     display: flex;
     flex-direction: row;
-    padding: 20px;
     gap: 10px;
 }
 
@@ -52,5 +68,15 @@
     gap: 5px;
 }
 
+.StatPage_hDivider{
+    position: absolute;
+    height: 20px;
+    width: 400px;
+    top: 410px;
+    right: 30px;
+}
 
-
+.StatPage_vDivider{
+    position: absolute;
+    left: 300px;
+}

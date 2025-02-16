@@ -65,14 +65,16 @@
 .Page_rightSideContent{
     display: flex;
     flex-direction: row;
+    padding: 26px;
+    position: relative;
     flex: 1;
 }
 
 .Page_leftSideContent{
-    padding: 26px;
-    position: relative;
     display: flex;
     flex-direction: column;
+    position: relative;
+    padding: 26px;
     flex: 1;
 }
 

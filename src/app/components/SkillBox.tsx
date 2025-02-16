@@ -99,8 +99,6 @@ export default function SkillBox (props: Props) {
     }
 
     return <div className={classNames('SkillBox_root', props.baseClassName, props.classModifiers)}>
-        <div className="SkillBox_skillContainer">
            {createSkillNodes()}
-        </div>
     </div>
 }

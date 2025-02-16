@@ -2,9 +2,11 @@ import { ComponentProps } from "./Component";
 import './../styles/components/Divider.css'
 import { useState } from "react";
 import Icon from "./Icon";
+import classNames from "classnames";
 
 export enum DividerType {
     Straight, 
+    StraightLong, 
     Bend,
     PartialBend,
 }
@@ -23,6 +25,9 @@ export default function Divider(props: Props){
             case DividerType.Straight:
                 icon = 'dexDecorations/DividerLineStraight.svg';
                 break;
+            case DividerType.StraightLong:
+                icon = 'dexDecorations/DividerLineStraightLong.svg';
+                break;
             case DividerType.Bend:
                 icon = 'dexDecorations/DividerLineBend.svg';
                 break;
@@ -36,7 +41,7 @@ export default function Divider(props: Props){
    
     return <Icon 
             baseClassName={props.baseClassName}
-            classModifiers={props.classModifiers}
+            classModifiers={classNames(props.classModifiers, 'noDefaultSize')}
             src={icon}
             alt='Divider Line'
         />
